@@ -1,4 +1,4 @@
-FROM ruby:2.5.3-stretch
+FROM ruby:2.7
 
 ENV BUNDLE_GEMFILE=/app/Gemfile \
   BUNDLE_JOBS=2 \

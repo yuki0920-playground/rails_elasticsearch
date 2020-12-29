@@ -1,15 +1,8 @@
-FROM ruby:2.7
-
-ENV BUNDLE_GEMFILE=/app/Gemfile \
-  BUNDLE_JOBS=2 \
-  RAILS_ENV=development \
-  LANG=C.UTF-8
-
-RUN apt-get update -qq
-RUN apt-get install -y build-essential
-RUN apt-get install -y libpq-dev
-RUN apt-get install -y nodejs
-
-# ワーキングディレクトリの設定
-RUN mkdir /app
-WORKDIR /app
+FROM ruby:2.7.2
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential libpq-dev nodejs \
+  && rm -rf /var/lib/apt/lists/*
+WORKDIR /myapp
+COPY Gemfile /myapp/Gemfile
+COPY Gemfile.lock /myapp/Gemfile.lock
+RUN gem install bundler:2.0.2 && bundle install
+COPY . /myapp

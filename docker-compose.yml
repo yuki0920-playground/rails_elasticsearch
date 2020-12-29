@@ -36,19 +36,17 @@ services:
       - MYSQL_DATABASE=rails_es_sample
     build: ./docker/mysql
     ports:
-      - "3306:3306"
+      - 3306:3306
+    volumes:
+      - ./docker/mysql:/etc/mysql
   # Rails用のコンテナ
   rails:
     build: .
-    # 必要であればshなどに bundle install や rails s を実行してrailsを起動する処理を書く
-    # command: scripts/start-server.sh
+    command: bundle exec rails server -p 3000 -b '0.0.0.0'
     volumes:
-      - .:/app
-      # 公式のDockerfile(ruby:2.5.3-stretch)では環境変数のBUNDLE_APP_CONFIGがデフォルトで
-      # /usr/local/bundleに設定されているため、dockerのローカルvolumeでマウントしてそこにgemを入れている
-      - vendor_bundle:/user/local/bundle
+      - .:/myapp
     ports:
-      - "3003:3000"
+      - 3000:3000
     links:
       - db
       - es
@@ -62,6 +60,4 @@ services:
 
 volumes:
   es_sample_data:
-    driver: local
-  vendor_bundle:
     driver: local

@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bulma";
+
+.table tr {
+  td:nth-child(-n + 3) {
+    width: 100px;
+  }
+  td:nth-child(4) {
+    width: 150px;
+  }
+}

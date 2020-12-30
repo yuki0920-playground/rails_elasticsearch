@@ -28,3 +28,11 @@ $ docker-compose up
     "tagline" : "You Know, for Search"
   }
   ```
+
+## Gem 更新時
+
+exec ではなく run
+
+```
+docker-compose run rails bundle install
+```

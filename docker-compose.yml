@@ -34,7 +34,6 @@ services:
       - MYSQL_PASSWORD=docker
       - MYSQL_USER=docker
       - MYSQL_DATABASE=rails_es_sample
-    build: ./docker/mysql
     ports:
       - 3306:3306
     volumes:

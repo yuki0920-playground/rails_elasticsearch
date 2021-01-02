@@ -55,5 +55,18 @@ module MangaSearchable
         }
       )
     end
+
+    def es_search(query)
+      __elasticsearch__.search({
+        query: {
+          multi_match: {
+            fields: %w(id publisher author category title description),
+            type: 'cross_fields',
+            query: query,
+            operator: 'and'
+          }
+        }
+      })
+    end
   end
 end
